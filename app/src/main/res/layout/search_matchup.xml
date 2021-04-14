@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/searchLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:maxHeight="500px"
+                android:src="@drawable/matchup_baner" />
+
+            <TextView
+                android:id="@+id/textMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:autoLink="web"
+                android:gravity="center" />
+
+            <AutoCompleteTextView
+                android:id="@+id/gameAutoComplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_edittext"
+                android:completionThreshold="1"
+                android:dropDownVerticalOffset="0dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="15dp"
+                android:selectAllOnFocus="true"
+                android:textColor="#000000"
+                android:hint="Game"
+                android:textSize="16sp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/characterAutoComplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_edittext"
+                android:completionThreshold="1"
+                android:dropDownVerticalOffset="0dp"
+                android:gravity="center"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="15dp"
+                android:padding="10dp"
+                android:selectAllOnFocus="true"
+                android:textColor="#000000"
+                android:hint="Character"
+                android:textSize="16sp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableRight="@android:drawable/ic_menu_search"
+                    android:onClick="searchButton"
+                    android:layout_marginVertical="15dp"
+                    android:text="Let's Go!!!"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorMagicMint" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="120dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="infoButton"
+                android:background="@color/black"
+                android:src="@drawable/ic_info" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

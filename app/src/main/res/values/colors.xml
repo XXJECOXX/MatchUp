@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="softWhite">#CCCCCC</color>
+    <color name="gray">#AAAAAA</color>
+    <color name="transparent">#00000000</color>
+    <color name="gtt_gold">#B1925D</color>
+    <color name="colorBlack">#0C0C0C</color>
+
+
+    <color name="colorPrimary">@color/colorOlivine</color>
+    <color name="colorAccent">@color/colorCamel</color>
+    <color name="colorPrimaryVariant">@color/colorOlivine</color>
+    <color name="colorClear">#00000000</color>
+
+    <color name="colorToolbar">@color/colorOlivineAlpha</color>
+    <color name="colorPopUp">@color/colorGrannySmithApple</color>
+    <color name="colorButtonGradient1">@color/colorGrannySmithAppleAlpha</color>
+    <color name="colorButtonGradient2">@color/colorSpringGreen30</color>
+    <color name="colorButtonText">@color/colorFrenchBlue</color>
+    <color name="colorButtons2">@color/colorGrannySmithApple</color>
+    <color name="colorButtons2Pressed">@color/colorOlivineAlpha50</color>
+    <color name="colorButtons2Text">@color/colorBlackCoffee</color>
+    <color name="colorStroke">@color/colorCamel</color>
+    <color name="colorStrokeVariant">@color/colorBlackCoffee</color>
+    <color name="colorDialogMenu">@color/colorAntiqueWhite</color>
+
+    <color name="colorError">#B00020</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorSuccess">#4EAA00</color>
+    <color name="colorOnSuccess">#FFFFFF</color>
+    <color name="colorIcons">@color/colorBlackCoffee</color>
+    <color name="colorIcons2">@color/colorMagicMint</color>
+    <color name="colorToastText">@color/colorMagicMint</color>
+    <color name="colorToastBackground">@color/teal_700</color>
+
+    <color name="comparable_product">@color/colorLapisLazuli30</color>
+
+
+    <color name="colorAtomicTangerine">#FF9666</color>
+    <color name="colorCoral">#FF7F50</color>
+
+    <color name="colorPeach">#FFE5B4</color>
+    <color name="colorGoldenYellow">#9AFFDF00</color>
+    <color name="colorGold">#E6BE8A</color>
+    <color name="colorDesertSand">#EDC9AF</color>
+    <color name="colorAlmond">#4DEFDECD</color>
+    <color name="colorAntiqueWhite">#FAEBD7</color>
+    <color name="colorGoldMetallic">#D4AF37</color>
+    <color name="colorCorn">#AAF2C649</color>
+    <color name="colorMustardYellow">#AAE1AD01</color>
+    <color name="colorLatte">#A67B5B</color>
+    <color name="colorCamel">#C19A6B</color>
+    <color name="colorBlackCoffee">#3B2F2F</color>
+
+    <color name="colorMagicMint">#AAF0D1</color>
+    <color name="colorBrightMint">#4FFFB0</color>
+    <color name="colorGrannySmithApple">#A8E4A0</color>
+    <color name="colorGrannySmithAppleAlpha">#40A8E4A0</color>
+    <color name="colorSpringGreen">#AA00E478</color>
+    <color name="colorSpringGreen30">#4D00E478</color>
+    <color name="colorOlivine">#9AB973</color>
+    <color name="colorOlivineAlpha">#409AB973</color>
+    <color name="colorOlivineAlpha50">#809AB973</color>
+    <color name="colorTeal">#EE008080</color>
+
+    <color name="colorTurquoiseBlue">#00FFEF</color>
+    <color name="colorTurquoise">#40E0D0</color>
+    <color name="colorBlueMunsell">#0093AF</color>
+    <color name="colorCyan">#00B7EB</color>
+    <color name="colorFrenchBlue">#0072BB</color>
+    <color name="colorAirSuperiorityBlue">#72A0C1</color>
+    <color name="colorAzure">#007FFF</color>
+    <color name="colorAzure40">#66007FFF</color>
+    <color name="colorStarCommand">#007FFF</color>
+    <color name="colorStarCommand50">#80007FFF</color>
+    <color name="colorLapisLazuli">#26619C</color>
+    <color name="colorLapisLazuli30">#4D26619C</color>
+    <color name="colorLapisLazuli60">#9926619C</color>
+    <color name="colorPhthalBlue">#000F89</color>
+
+    <color name="colorGainsboro">#DCDCDC</color>
+    <color name="colorGranite">#676767</color>
+    <color name="colorSilver">#C0C0C0</color>
+    <color name="colorCultured">#F5F5F5</color>
+</resources>

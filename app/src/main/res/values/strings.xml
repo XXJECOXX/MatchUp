@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY url_project "http://matchup.epyco.net"><!ENTITY brand "MatchUp">]>
+<resources>
+    <!--App info-->
+    <string name="app_name">MatchUp</string>
+
+    <!--Server URL resource-->
+    <string name="controller" translatable="false">&url_project;/app/%1$s</string>
+    <string name="website" translatable="false">&url_project;</string>
+    <!--<string name="website">http://epyco.net/matchup</string>-->
+    <string name="localhost">http://localhost/epyco/matchup</string>
+    <!--Error network messages-->
+    <string name="errorRequestNetwork">No Internet Connection</string>
+    <string name="errorRequestServer">The server couldn\'t be found. Please try again after some time</string>
+    <string name="errorRequestAuth">Authentication failure</string>
+    <string name="errorRequestParse">Parsing error! Please try again after some time</string>
+    <string name="errorRequestTimeout">Connection TimeOut! Please check your internet connection</string>
+    <string name="errorRequestOther">Something went wrong with the server connection</string><!--Error input validation-->
+    <string name="errorRequired">Required</string>
+    <string name="errorTakenUsername">Username is already taken</string>
+    <string name="errorTakenEmail">Email is already taken</string>
+    <string name="errorIncorrectUsername">Username is incorrect</string>
+    <string name="errorIncorrectEmail">Email is incorrect</string>
+    <string name="errorIncorrectPassword">Password must be at least 6 characters</string>
+    <string name="errorIncorrectPasswordConfirmation">Password doesn\'t match</string>
+    <string name="errorExpiredPasswordChange">The time has expired, send us your email again.</string>
+    <string name="errorLogin">Incorrect username or password</string>
+    <string name="errorPasswordReset">Can\'t find that email, sorry</string>
+
+</resources>
