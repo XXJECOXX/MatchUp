@@ -1,23 +1,28 @@
 package com.epyco.matchup
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Adapter
+import android.view.View
 import android.widget.AutoCompleteTextView
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.epyco.matchup.adapters.SuggestStringAdapter
+import com.epyco.matchup.helper.MatchUpCache
 import com.epyco.matchup.helper.NetworkRequest
+import com.epyco.matchup.helper.Utilities
 import org.json.JSONArray
 import org.json.JSONException
-import org.json.JSONObject
 
-class SearchMatchUp : AppCompatActivity() {
+class SearchMatchUpsView : AppCompatActivity() {
     private lateinit var networkRequest: NetworkRequest
     lateinit var gameAutoCompleteTextView: AutoCompleteTextView
     lateinit var characterAutoCompleteTextView: AutoCompleteTextView
     var gameList: MutableList<String> = mutableListOf()
+    var charactersIdList: MutableList<String> = mutableListOf()
     var charactersList: MutableList<String> = mutableListOf()
+    val cache = MatchUpCache(applicationContext)
     lateinit var gameAdapter:SuggestStringAdapter
     lateinit var characterAdapter:SuggestStringAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,18 +58,40 @@ class SearchMatchUp : AppCompatActivity() {
                     Response.Listener { response ->
                         println(response)
                         try {
-                            val characters = JSONArray(response)
-                            for (i in 0 until characters.length()) {
-                                charactersList.add(characters.getString(i))
+                            cache.characterJSON = response
+                            val charactersArrays = JSONArray(response)
+                            for (i in 0 until charactersArrays.length()) {
+                                val character = charactersArrays.getJSONArray(i)
+                                charactersIdList.add(character.getString(0))
+                                charactersList.add(character.getString(1))
                             }
                             characterAdapter.notifyDataSetChanged()
                         } catch (e: JSONException) {
                         }
                     }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
-                ) {})
+                ) {
+                    override fun getParams(): MutableMap<String, String> = mutableMapOf("game" to gameList[position])
+                })
             }
         }
 
+    }
+
+    fun letsGo(view: View){
+        var game = gameAutoCompleteTextView.text.toString().trim()
+        var character = characterAutoCompleteTextView.text.toString().trim()
+        var position = charactersList.indexOf(character)
+        var characterId = charactersIdList.get(position)
+        gameAutoCompleteTextView.error = null
+        characterAutoCompleteTextView.error = null
+
+        // Validate required fields
+        if (!Utilities.required(arrayOf(gameAutoCompleteTextView,characterAutoCompleteTextView))) {
+            return
+        }
+        cache.game = game
+        cache.characterId = characterId
+        startActivity(Intent(applicationContext,ListMatchUpsView::class.java))
     }
 
 }

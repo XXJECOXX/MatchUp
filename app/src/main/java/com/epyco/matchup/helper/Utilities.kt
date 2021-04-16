@@ -26,36 +26,34 @@ object Utilities {
         }
     }
 
+
     fun required(field: EditText): Boolean {
         var valid = true
         if (field.text.toString().isBlank()) {
             field.text.clear()
-            field.setHint(R.string.errorRequired)
+            field.error = "required"
             field.setHintTextColor(Color.RED)
+            field.requestFocus()
             valid = false
             field.isFocusable = true
         }
         return valid
     }
 
+    fun required(fields: Array<EditText>): Boolean {
+        var valid = true
+        for (field in fields) {
+            valid = required(field)
+        }
+        return valid
+    }
+
+
     fun currencyFormat(value: Double): String? {
         val format: NumberFormat = NumberFormat.getCurrencyInstance()
         format.maximumFractionDigits = 2
         format.minimumFractionDigits = 0
         return format.format(value)
-    }
-
-    fun required(fields: Array<EditText>): Boolean {
-        var valid = true
-        for (field in fields) {
-            if (field.text.toString().isBlank()) {
-                field.text.clear()
-                field.setHint(R.string.errorRequired)
-                field.setHintTextColor(Color.RED)
-                valid = false
-            }
-        }
-        return valid
     }
 
     fun cleanJSONResponse(response: String): String {

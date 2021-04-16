@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:drawableRight="@android:drawable/ic_menu_search"
-                    android:onClick="searchButton"
+                    android:onClick="letsGo"
                     android:layout_marginVertical="15dp"
                     android:text="Let's Go!!!"
                     android:textAllCaps="false"

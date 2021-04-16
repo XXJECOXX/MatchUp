@@ -9,30 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3">
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:layout_margin="2dp"
-            android:onClick="previousCharacter"
-            android:text="PREVIOUS" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:layout_margin="2dp"
-            android:onClick="nextCharacter"
-            android:text="NEXT" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,13 +18,14 @@
             android:layout_marginLeft="10dp"
             android:text="Game: "
             android:textStyle="bold"
+            android:textSize="20dp"
             android:textColor="@color/softWhite"/>
 
         <TextView
             android:id="@+id/game"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:textSize="20dp"
             android:textColor="@color/softWhite"
             android:text="Street Fighter V" />
 
@@ -55,12 +34,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:textSize="16dp"
             android:textColor="@color/softWhite"
             android:text="Character: "
             android:textStyle="bold" />
@@ -70,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/softWhite"
-            android:ems="10"
+            android:textSize="16dp"
             android:text="Ryu" />
 
     </LinearLayout>
@@ -79,7 +60,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
+        android:layout_marginTop="20dp"
         android:background="#2979FF"
         android:gravity="center"
         android:text="Order by:"
@@ -90,12 +71,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="5">
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_margin="2dp"
             android:onClick="orderByCharacter"
             android:text="CHARACTER" />
@@ -103,7 +84,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_margin="2dp"
             android:onClick="orderByMatchup"
             android:text="MATCHUP" />
@@ -118,7 +99,7 @@
         android:visibility="gone" />
 
     <ListView
-        android:id="@+id/list_matchups"
+        android:id="@+id/list_matchUps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:listSelector="@drawable/selector"/>
@@ -132,4 +113,3 @@
         android:visibility="gone" />
 
 </LinearLayout>
-
