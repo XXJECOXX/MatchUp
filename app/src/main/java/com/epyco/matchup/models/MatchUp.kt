@@ -1,5 +1,5 @@
 package com.epyco.matchup.models
 
 data class MatchUp (
-    val characterId1: String, val characterId2: String, val matchUp: Int
+    val characterName1: String, val characterName2: String, val value: Int
         )

@@ -22,12 +22,13 @@ class SearchMatchUpsView : AppCompatActivity() {
     var gameList: MutableList<String> = mutableListOf()
     var charactersIdList: MutableList<String> = mutableListOf()
     var charactersList: MutableList<String> = mutableListOf()
-    val cache = MatchUpCache(applicationContext)
+    lateinit var cache: MatchUpCache
     lateinit var gameAdapter:SuggestStringAdapter
     lateinit var characterAdapter:SuggestStringAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_matchup)
+        cache = MatchUpCache(applicationContext)
         gameAutoCompleteTextView = findViewById(R.id.gameAutoComplete)
         characterAutoCompleteTextView = findViewById(R.id.characterAutoComplete)
         gameAdapter = SuggestStringAdapter(applicationContext,gameList)
@@ -91,6 +92,7 @@ class SearchMatchUpsView : AppCompatActivity() {
         }
         cache.game = game
         cache.characterId = characterId
+        cache.characterName = character
         startActivity(Intent(applicationContext,ListMatchUpsView::class.java))
     }
 

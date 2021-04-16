@@ -18,6 +18,11 @@ class MatchUpCache(context: Context) {
         set(value) {
             preferences.edit().putString("characterId", value).apply()
         }
+    var characterName: String
+        get() = preferences.getString("characterName", null) ?: ""
+        set(value) {
+            preferences.edit().putString("characterName", value).apply()
+        }
     var characterJSON: String
         get() = preferences.getString("characterJSON", null) ?: ""
         set(value) {
