@@ -43,7 +43,7 @@ object Utilities {
     fun required(fields: Array<EditText>): Boolean {
         var valid = true
         for (field in fields) {
-            valid = required(field)
+            valid = required(field) && valid
         }
         return valid
     }

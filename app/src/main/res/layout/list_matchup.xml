@@ -23,7 +23,7 @@
             android:textColor="@color/softWhite"/>
 
         <TextView
-            android:id="@+id/game"
+            android:id="@+id/gameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -48,7 +48,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/character"
+            android:id="@+id/characterTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/softWhite"
@@ -72,23 +72,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="10">
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:layout_weight="3"
-            android:layout_margin="2dp"
-            android:onClick="orderByCharacter"
-            android:text="CHARACTER" />
+            android:onClick="orderByWinRatio"
+            android:text="Win %" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="7"
             android:layout_margin="2dp"
-            android:onClick="orderByMatchup"
-            android:text="MATCHUP" />
+            android:onClick="orderByCharacterName"
+            android:text="CHARACTER" />
 
     </LinearLayout>
 

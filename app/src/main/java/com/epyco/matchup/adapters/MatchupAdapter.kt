@@ -2,6 +2,7 @@ package com.epyco.matchup.adapters
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.service.autofill.FieldClassification
 import android.view.LayoutInflater
 import android.view.View
@@ -31,8 +32,13 @@ class MatchupAdapter(private val context: Context, private val listsArray: Mutab
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val matchUp: MatchUp = listsArray[position]
-        holder.charactert2NameTextView.text = matchUp.characterName2
         holder.valueTextView.text = matchUp.value.toString()
+        holder.charactert2NameTextView.text = matchUp.characterName2
+        when(matchUp.value){
+            in 51..100 -> holder.valueTextView.setTextColor(Color.GREEN)
+            50 -> holder.valueTextView.setTextColor(Color.parseColor("#26619C"))
+            in 1..49 -> holder.valueTextView.setTextColor(Color.RED)
+        }
     }
 
     override fun getItemCount(): Int {

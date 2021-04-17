@@ -3,6 +3,7 @@ package com.epyco.matchup
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Response
@@ -23,6 +24,10 @@ class ListMatchUpsView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list_matchup)
         cache = MatchUpCache(applicationContext)
+        var gameTextView: TextView = findViewById(R.id.gameTextView)
+        gameTextView.text = cache.game
+        var characterTextView: TextView = findViewById(R.id.characterTextView)
+        characterTextView.text = cache.characterName
         val networkRequest = NetworkRequest(applicationContext)
         matchUpRecycler = findViewById(R.id.list_matchUps)
         matchUpAdapter = MatchupAdapter(applicationContext,matchUpsList)
@@ -59,6 +64,12 @@ class ListMatchUpsView : AppCompatActivity() {
 
     }
 
-    fun orderByCharacter(view: View) {}
-    fun orderByMatchup(view: View) {}
+    fun orderByCharacterName(view: View) {
+        matchUpsList.sortBy { it.characterName2 }
+        matchUpAdapter.notifyDataSetChanged()
+    }
+    fun orderByWinRatio(view: View) {
+        matchUpsList.sortBy { it.value }
+        matchUpAdapter.notifyDataSetChanged()
+    }
 }

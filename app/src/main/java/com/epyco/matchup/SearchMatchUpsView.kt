@@ -1,6 +1,7 @@
 package com.epyco.matchup
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -54,6 +55,9 @@ class SearchMatchUpsView : AppCompatActivity() {
 
         gameAutoCompleteTextView.setOnItemClickListener { _, view, position, _ ->
             if (view != null) {
+                charactersList.clear()
+                characterAdapter.notifyDataSetChanged()
+                characterAutoCompleteTextView.isEnabled = true
                 networkRequest.addToRequestQueue(object : StringRequest(
                     Method.POST, getString(R.string.controller, "getCharactersByGame"),
                     Response.Listener { response ->
@@ -79,10 +83,6 @@ class SearchMatchUpsView : AppCompatActivity() {
     }
 
     fun letsGo(view: View){
-        var game = gameAutoCompleteTextView.text.toString().trim()
-        var character = characterAutoCompleteTextView.text.toString().trim()
-        var position = charactersList.indexOf(character)
-        var characterId = charactersIdList.get(position)
         gameAutoCompleteTextView.error = null
         characterAutoCompleteTextView.error = null
 
@@ -90,6 +90,15 @@ class SearchMatchUpsView : AppCompatActivity() {
         if (!Utilities.required(arrayOf(gameAutoCompleteTextView,characterAutoCompleteTextView))) {
             return
         }
+        var game = gameAutoCompleteTextView.text.toString().trim()
+        var character = characterAutoCompleteTextView.text.toString().trim()
+        var position = charactersList.indexOf(character)
+        if (position == -1){
+            characterAutoCompleteTextView.text.clear()
+            Utilities.required(characterAutoCompleteTextView)
+            return
+        }
+        var characterId = charactersIdList.get(position)
         cache.game = game
         cache.characterId = characterId
         cache.characterName = character
