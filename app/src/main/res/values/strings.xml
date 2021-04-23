@@ -25,5 +25,6 @@
     <string name="errorExpiredPasswordChange">The time has expired, send us your email again.</string>
     <string name="errorLogin">Incorrect username or password</string>
     <string name="errorPasswordReset">Can\'t find that email, sorry</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
 </resources>
