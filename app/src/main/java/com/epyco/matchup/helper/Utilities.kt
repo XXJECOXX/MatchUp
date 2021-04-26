@@ -18,10 +18,12 @@ import java.util.*
 object Utilities {
     var animationButtonClick = AlphaAnimation(1f, 0.3f)
 
-    fun hideKeyboard(activity: Activity) {
-        val view = activity.currentFocus
-        if (view != null) {
-            val inputManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    fun hideKeyboard(activity: Activity, view: View? = null) {
+        val viewWithFocus = activity.currentFocus
+        val inputManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (viewWithFocus != null) {
+            inputManager.hideSoftInputFromWindow(viewWithFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        } else if (view != null) {
             inputManager.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
     }

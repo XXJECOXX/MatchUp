@@ -5,7 +5,9 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.AutoCompleteTextView
+import android.widget.TextView
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
@@ -55,6 +57,7 @@ class SearchMatchUpsView : AppCompatActivity() {
 
         gameAutoCompleteTextView.setOnItemClickListener { _, view, position, _ ->
             if (view != null) {
+                Utilities.hideKeyboard(this, view)
                 charactersList.clear()
                 characterAdapter.notifyDataSetChanged()
                 characterAutoCompleteTextView.isEnabled = true
@@ -80,9 +83,16 @@ class SearchMatchUpsView : AppCompatActivity() {
             }
         }
 
+        characterAutoCompleteTextView.setOnItemClickListener { _, view, position, _ ->
+            if (view != null) {
+                Utilities.hideKeyboard(this, view)
+            }
+        }
+
     }
 
     fun letsGo(view: View){
+        Utilities.hideKeyboard(this, view)
         gameAutoCompleteTextView.error = null
         characterAutoCompleteTextView.error = null
 
@@ -102,6 +112,7 @@ class SearchMatchUpsView : AppCompatActivity() {
         cache.game = game
         cache.characterId = characterId
         cache.characterName = character
+        characterAutoCompleteTextView.text.clear()
         startActivity(Intent(applicationContext,ListMatchUpsView::class.java))
     }
 
