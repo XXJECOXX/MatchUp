@@ -23,9 +23,19 @@ class MatchUpCache(context: Context) {
         set(value) {
             preferences.edit().putString("characterName", value).apply()
         }
+    var gameJSON: String
+        get() = preferences.getString("gameJSON", null) ?: ""
+        set(value) {
+            preferences.edit().putString("gameJSON", value).apply()
+        }
     var characterJSON: String
         get() = preferences.getString("characterJSON", null) ?: ""
         set(value) {
             preferences.edit().putString("characterJSON", value).apply()
+        }
+    var searchViewCachedData: Boolean
+        get() = preferences.getBoolean("searchCachedData", false)
+        set(value) {
+            preferences.edit().putBoolean("searchCachedData", value).apply()
         }
 }

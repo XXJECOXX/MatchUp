@@ -1,15 +1,11 @@
 package com.epyco.matchup
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.AutoCompleteTextView
-import android.widget.TextView
 import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.epyco.matchup.adapters.SuggestStringAdapter
 import com.epyco.matchup.helper.MatchUpCache
@@ -41,19 +37,40 @@ class SearchMatchUpsView : AppCompatActivity() {
 
         networkRequest = NetworkRequest(applicationContext)
 
-        networkRequest.addToRequestQueue(object : StringRequest(
-            Method.POST, getString(R.string.controller, "getAllGames"),
-            Response.Listener { response ->
-                try {
-                    val games = JSONArray(response)
-                    for (i in 0 until games.length()) {
-                        gameList.add(games.getString(i))
+        if (cache.searchViewCachedData){
+            characterAutoCompleteTextView.isEnabled = true
+            gameAutoCompleteTextView.setText(cache.game)
+            characterAutoCompleteTextView.setText(cache.characterName)
+            val games = JSONArray(cache.gameJSON)
+            for (i in 0 until games.length()) {
+                gameList.add(games.getString(i))
+            }
+            gameAdapter.notifyDataSetChanged()
+            val charactersArrays = JSONArray(cache.characterJSON)
+            for (i in 0 until charactersArrays.length()) {
+                val character = charactersArrays.getJSONArray(i)
+                charactersIdList.add(character.getString(0))
+                charactersList.add(character.getString(1))
+            }
+            characterAdapter.notifyDataSetChanged()
+        }
+        else {
+            networkRequest.addToRequestQueue(object : StringRequest(
+                Method.POST, getString(R.string.controller, "getAllGames"),
+                Response.Listener { response ->
+                    println("adbcdhjcbfuvbfkvb")
+                    try {
+                        cache.gameJSON = response
+                        val games = JSONArray(response)
+                        for (i in 0 until games.length()) {
+                            gameList.add(games.getString(i))
+                        }
+                        gameAdapter.notifyDataSetChanged()
+                    } catch (e: JSONException) {
                     }
-                    gameAdapter.notifyDataSetChanged()
-                } catch (e: JSONException) {
-                }
-            }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
-        ){})
+                }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
+            ) {})
+        }
 
         gameAutoCompleteTextView.setOnItemClickListener { _, view, position, _ ->
             if (view != null) {
@@ -102,6 +119,7 @@ class SearchMatchUpsView : AppCompatActivity() {
         }
         var game = gameAutoCompleteTextView.text.toString().trim()
         var character = characterAutoCompleteTextView.text.toString().trim()
+        //Valida si existe el personaje en la lista de personajes en la respuesta
         var position = charactersList.indexOf(character)
         if (position == -1){
             characterAutoCompleteTextView.text.clear()
@@ -109,11 +127,21 @@ class SearchMatchUpsView : AppCompatActivity() {
             return
         }
         var characterId = charactersIdList.get(position)
-        cache.game = game
         cache.characterId = characterId
-        cache.characterName = character
-        characterAutoCompleteTextView.text.clear()
         startActivity(Intent(applicationContext,ListMatchUpsView::class.java))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        characterAutoCompleteTextView.clearFocus()
+        if (gameAutoCompleteTextView.text.isNotBlank() || characterAutoCompleteTextView.text.isNotBlank()){
+            cache.searchViewCachedData = true
+            cache.game = gameAutoCompleteTextView.text.toString().trim()
+            cache.characterName = characterAutoCompleteTextView.text.toString().trim()
+        }
+        else {
+            cache.searchViewCachedData = false
+        }
     }
 
 }
