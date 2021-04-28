@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.epyco.matchup.adapters.SuggestStringAdapter
@@ -105,6 +106,7 @@ class SearchMatchUpsView : AppCompatActivity() {
                 Utilities.hideKeyboard(this, view)
             }
         }
+        Toast.makeText(this,this.packageName,Toast.LENGTH_LONG).show()
 
     }
 
