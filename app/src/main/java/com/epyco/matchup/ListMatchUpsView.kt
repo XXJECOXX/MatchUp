@@ -65,7 +65,6 @@ class ListMatchUpsView : AppCompatActivity() {
                                 break
                             }
                         }
-                println(cache.characterName+", "+characterName2+", "+matchupValue)
                         matchUpsList.add(MatchUp(cache.characterName, characterName2, matchupValue))
                     }
                     matchUpAdapter.notifyDataSetChanged()
