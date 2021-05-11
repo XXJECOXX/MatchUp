@@ -36,7 +36,6 @@ class ListMatchUpsView : AppCompatActivity() {
         cache = MatchUpCache(applicationContext)
         var gameTextView: TextView = findViewById(R.id.gameTextView)
         gameTextView.text = cache.game
-        println(cache.characterName+"dsacdskjcndkjcndkjncdkjndk")
         var characterTextView: TextView = findViewById(R.id.characterTextView)
         characterTextView.text = cache.characterName
         val networkRequest = NetworkRequest(applicationContext)
@@ -51,6 +50,7 @@ class ListMatchUpsView : AppCompatActivity() {
         networkRequest.addToRequestQueue(object : StringRequest(
             Method.POST, getString(R.string.controller, "getCharacterMatchUps"),
             Response.Listener { response ->
+                println(response)
                 try {
                     val charactersCache = JSONArray(cache.characterJSON)
                     val matchUpsArrays = JSONArray(response)
@@ -65,6 +65,7 @@ class ListMatchUpsView : AppCompatActivity() {
                                 break
                             }
                         }
+                println(cache.characterName+", "+characterName2+", "+matchupValue)
                         matchUpsList.add(MatchUp(cache.characterName, characterName2, matchupValue))
                     }
                     matchUpAdapter.notifyDataSetChanged()

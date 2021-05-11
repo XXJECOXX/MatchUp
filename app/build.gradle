@@ -7,18 +7,6 @@ plugins {
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.3"
-    flavorDimensions 'default'
-    productFlavors {
-        user{
-            dimension 'default'
-            applicationId "com.epyco.matchup"
-        }
-        admin{
-            dimension 'default'
-            applicationId "com.epyco.matchup.admin"
-        }
-    }
-
 
     defaultConfig {
         applicationId "com.epyco.matchup"
