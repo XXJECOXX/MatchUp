@@ -29,8 +29,7 @@ class ListMatchUpsView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list_matchup)
         MobileAds.initialize(this)
-
-        mAdView = findViewById<AdView>(R.id.adView)
+        mAdView = findViewById(R.id.adView)
         val adRequest: AdRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
 
@@ -52,7 +51,6 @@ class ListMatchUpsView : AppCompatActivity() {
         networkRequest.addToRequestQueue(object : StringRequest(
             Method.POST, getString(R.string.controller, "getCharacterMatchUps"),
             Response.Listener { response ->
-                println(response)
                 try {
                     val charactersCache = JSONArray(cache.characterJSON)
                     val matchUpsArrays = JSONArray(response)

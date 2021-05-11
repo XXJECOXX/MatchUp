@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.epyco.matchup.adapters.SuggestStringAdapter
@@ -106,11 +105,34 @@ class SearchMatchUpsView : AppCompatActivity() {
                 Utilities.hideKeyboard(this, view)
             }
         }
-        Toast.makeText(this,this.packageName,Toast.LENGTH_LONG).show()
 
     }
 
     fun letsGo(view: View){
+        Utilities.hideKeyboard(this, view)
+        gameAutoCompleteTextView.error = null
+        characterAutoCompleteTextView.error = null
+
+        // Validate required fields
+        if (!Utilities.required(arrayOf(gameAutoCompleteTextView,characterAutoCompleteTextView))) {
+            return
+        }
+        var game = gameAutoCompleteTextView.text.toString().trim()
+        var character = characterAutoCompleteTextView.text.toString().trim()
+        //Valida si existe el personaje en la lista de personajes en la respuesta
+        var position = charactersList.indexOf(character)
+        if (position == -1){
+            characterAutoCompleteTextView.text.clear()
+            Utilities.required(characterAutoCompleteTextView)
+            return
+        }
+        var characterId = charactersIdList.get(position)
+        cache.characterId = characterId
+        startActivity(Intent(applicationContext,ListMatchUpsView::class.java))
+    }
+
+
+    fun showInfo(view: View){
         Utilities.hideKeyboard(this, view)
         gameAutoCompleteTextView.error = null
         characterAutoCompleteTextView.error = null
