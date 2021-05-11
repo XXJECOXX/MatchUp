@@ -29,15 +29,13 @@ class ListMatchUpsView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list_matchup)
         MobileAds.initialize(this)
-
-        mAdView = findViewById<AdView>(R.id.adView)
+        mAdView = findViewById(R.id.adView)
         val adRequest: AdRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
 
         cache = MatchUpCache(applicationContext)
         var gameTextView: TextView = findViewById(R.id.gameTextView)
         gameTextView.text = cache.game
-        println(cache.characterName+"dsacdskjcndkjcndkjncdkjndk")
         var characterTextView: TextView = findViewById(R.id.characterTextView)
         characterTextView.text = cache.characterName
         val networkRequest = NetworkRequest(applicationContext)
