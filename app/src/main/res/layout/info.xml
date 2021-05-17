@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="320dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="50dp"
+                android:adjustViewBounds="true"
+                android:maxHeight="405px"
+                android:src="@drawable/matchup_baner" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:text="Info"
+                android:textColor="@color/gtt_gold"
+                android:textSize="33sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:autoLink="email"
+                android:gravity="center"
+                android:text="Email: matchupapp@gmail.com"
+                android:textColor="@color/colorMagicMint"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:autoLink="web"
+                android:gravity="center"
+                android:textColor="@color/colorMagicMint"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/privacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:autoLink="web"
+                android:gravity="center"
+                android:textColor="@color/colorMagicMint"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/versionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:textAlignment="inherit"
+                android:textColor="@color/colorMagicMint"
+                android:textSize="14sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="25dp"
+                android:gravity="center"
+                android:onClick="back"
+                android:text="BACK"
+                android:textColor="@color/colorMagicMint" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
+
