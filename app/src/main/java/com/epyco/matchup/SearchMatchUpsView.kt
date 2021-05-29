@@ -58,7 +58,6 @@ class SearchMatchUpsView : AppCompatActivity() {
             networkRequest.addToRequestQueue(object : StringRequest(
                 Method.POST, getString(R.string.controller, "getAllGames"),
                 Response.Listener { response ->
-                    println("adbcdhjcbfuvbfkvb")
                     try {
                         cache.gameJSON = response
                         val games = JSONArray(response)

@@ -65,9 +65,11 @@ class SuggestStringAdapter(context: Context?, private var list: MutableList<Stri
                 return results
             }
 
-            override fun publishResults(constraint: CharSequence?, results: FilterResults) {
-                listFiltered = results.values as MutableList<String>
-                notifyDataSetChanged()
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                if (results != null && results.count > 0) {
+                    listFiltered = results.values as MutableList<String>
+                    notifyDataSetChanged()
+                }
             }
         }
     }

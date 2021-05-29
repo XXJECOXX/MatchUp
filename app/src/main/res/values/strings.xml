@@ -7,7 +7,7 @@
     <string name="controller" translatable="false">&url_project;/app/%1$s</string>
     <string name="website" translatable="false">&url_project;</string>
     <!--<string name="website">http://epyco.net/matchup</string>-->
-    <string name="localhost">http://localhost/epyco/matchup</string>
+    <!--<string name="localhost">http://localhost/epyco/matchup</string>-->
     <!--Error network messages-->
     <string name="errorRequestNetwork">No Internet Connection</string>
     <string name="errorRequestServer">The server couldn\'t be found. Please try again after some time</string>
