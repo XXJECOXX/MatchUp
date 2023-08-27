@@ -15,7 +15,7 @@
         <activity android:name=".ListMatchUpsView">
             android:configChanges="orientation|screenSize"
         </activity>
-        <activity android:name=".Info">
+        <activity android:name=".ActivityInfo">
             android:configChanges="orientation|screenSize"
         </activity>
         <activity android:name=".SearchMatchUpsView">

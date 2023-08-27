@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.epyco.matchup.adapters.SuggestStringAdapter
@@ -27,7 +26,7 @@ class SearchMatchUpsView : AppCompatActivity() {
     lateinit var characterAdapter:SuggestStringAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.search_matchup)
+        setContentView(R.layout.activity_search_matchups)
         cache = MatchUpCache(applicationContext)
         gameAutoCompleteTextView = findViewById(R.id.gameAutoComplete)
         characterAutoCompleteTextView = findViewById(R.id.characterAutoComplete)
@@ -134,7 +133,7 @@ class SearchMatchUpsView : AppCompatActivity() {
 
 
     fun showInfo(view: View){
-        startActivity(Intent(applicationContext, Info::class.java))
+        startActivity(Intent(applicationContext, ActivityInfo::class.java))
     }
 
     override fun onPause() {

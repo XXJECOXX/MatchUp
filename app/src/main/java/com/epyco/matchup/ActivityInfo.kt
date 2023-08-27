@@ -1,16 +1,15 @@
 package com.epyco.matchup
 
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class Info : AppCompatActivity() {
+class ActivityInfo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.info)
+        setContentView(R.layout.activity_info)
         (findViewById<View>(R.id.website) as TextView).text =
             "Website: " + getString(R.string.website)
         (findViewById<View>(R.id.privacy) as TextView).text =
