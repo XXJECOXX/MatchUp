@@ -68,7 +68,6 @@ class ListMatchUpsView : AppCompatActivity() {
                         matchUpsList.add(MatchUp(cache.characterName, characterName2, matchupValue))
                     }
                     matchUpAdapter.notifyDataSetChanged()
-                    println(matchUpsList)
                 } catch (e: JSONException) {
                 }
             }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.epyco.matchup.adapters.SuggestStringAdapter
@@ -71,7 +72,7 @@ class SearchMatchUpsView : AppCompatActivity() {
             ) {})
         }
 
-        gameAutoCompleteTextView.setOnItemClickListener { _, view, position, _ ->
+        gameAutoCompleteTextView.setOnItemClickListener { adapter, view, position, _ ->
             if (view != null) {
                 Utilities.hideKeyboard(this, view)
                 charactersList.clear()
@@ -95,7 +96,7 @@ class SearchMatchUpsView : AppCompatActivity() {
                     }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
                 ) {
                     override fun getParams(): MutableMap<String, String> =
-                        mutableMapOf("game" to gameList[position])
+                        mutableMapOf("game" to adapter.getItemAtPosition(position).toString())
                 })
             }
         }
@@ -126,7 +127,7 @@ class SearchMatchUpsView : AppCompatActivity() {
             Utilities.required(characterAutoCompleteTextView)
             return
         }
-        var characterId = charactersIdList.get(position)
+        var characterId = charactersIdList[position]
         cache.characterId = characterId
         startActivity(Intent(applicationContext, ListMatchUpsView::class.java))
     }
