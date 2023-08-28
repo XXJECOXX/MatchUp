@@ -2,6 +2,7 @@ package com.epyco.matchup
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.indexOf
 import android.view.View
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,11 +17,11 @@ import org.json.JSONException
 
 class SearchMatchUpsView : AppCompatActivity() {
     private lateinit var networkRequest: NetworkRequest
-    lateinit var gameAutoCompleteTextView: AutoCompleteTextView
-    lateinit var characterAutoCompleteTextView: AutoCompleteTextView
+    private lateinit var gameAutoCompleteTextView: AutoCompleteTextView
+    private lateinit var characterAutoCompleteTextView: AutoCompleteTextView
     var gameList: MutableList<String> = mutableListOf()
     var charactersIdList: MutableList<String> = mutableListOf()
-    var charactersList: MutableList<String> = mutableListOf()
+    var charactersNameList: MutableList<String> = mutableListOf()
     lateinit var cache: MatchUpCache
     lateinit var gameAdapter:SuggestStringAdapter
     lateinit var characterAdapter:SuggestStringAdapter
@@ -31,7 +32,7 @@ class SearchMatchUpsView : AppCompatActivity() {
         gameAutoCompleteTextView = findViewById(R.id.gameAutoComplete)
         characterAutoCompleteTextView = findViewById(R.id.characterAutoComplete)
         gameAdapter = SuggestStringAdapter(applicationContext, gameList)
-        characterAdapter = SuggestStringAdapter(applicationContext, charactersList)
+        characterAdapter = SuggestStringAdapter(applicationContext, charactersNameList)
         gameAutoCompleteTextView.setAdapter(gameAdapter)
         characterAutoCompleteTextView.setAdapter(characterAdapter)
 
@@ -50,7 +51,7 @@ class SearchMatchUpsView : AppCompatActivity() {
             for (i in 0 until charactersArrays.length()) {
                 val character = charactersArrays.getJSONArray(i)
                 charactersIdList.add(character.getString(0))
-                charactersList.add(character.getString(1))
+                charactersNameList.add(character.getString(1))
             }
             characterAdapter.notifyDataSetChanged()
         }
@@ -65,7 +66,7 @@ class SearchMatchUpsView : AppCompatActivity() {
                             gameList.add(games.getString(i))
                         }
                         gameAdapter.notifyDataSetChanged()
-                    } catch (e: JSONException) {
+                    } catch (_: JSONException) {
                     }
                 }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
             ) {})
@@ -74,34 +75,53 @@ class SearchMatchUpsView : AppCompatActivity() {
         gameAutoCompleteTextView.setOnItemClickListener { adapter, view, position, _ ->
             if (view != null) {
                 Utilities.hideKeyboard(this, view)
-                charactersList.clear()
+                charactersNameList.clear()
+                charactersIdList.clear()
                 characterAdapter.notifyDataSetChanged()
+                val gameName = gameAutoCompleteTextView.text.toString()
+                val gameId = gameList.indexOfFirst { it == gameName }
+                cache.game = gameList[gameId]
+                println("xxxxxxxxxx gameList "+gameList)
+                println("xxxxxxxxxx gameId "+gameId)
                 characterAutoCompleteTextView.isEnabled = true
                 networkRequest.addToRequestQueue(object : StringRequest(
                     Method.POST, getString(R.string.controller, "getCharactersByGame"),
                     Response.Listener { response ->
-                        println(response)
+                        println("xxxxxxxxxx response"+response)
                         try {
                             cache.characterJSON = response
                             val charactersArrays = JSONArray(response)
+                            println("xxxxxxxxxx charactersArrays"+charactersArrays)
                             for (i in 0 until charactersArrays.length()) {
                                 val character = charactersArrays.getJSONArray(i)
+                                println("xxxxxxxxxx character "+character)
                                 charactersIdList.add(character.getString(0))
-                                charactersList.add(character.getString(1))
+                                charactersNameList.add(character.getString(1))
                             }
                             characterAdapter.notifyDataSetChanged()
+                            characterAutoCompleteTextView.text.clear()
+                            println("xxxxxxxxxx cache.characterId"+cache.characterId)
+                            println("xxxxxxxxxx charactersIdList"+charactersIdList)
+                            println("xxxxxxxxxx charactersNameList"+charactersNameList)
                         } catch (e: JSONException) {
                         }
                     }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
                 ) {
                     override fun getParams(): MutableMap<String, String> =
-                        mutableMapOf("game" to adapter.getItemAtPosition(position).toString())
+                        mutableMapOf("game" to cache.game)
                 })
             }
         }
 
         characterAutoCompleteTextView.setOnItemClickListener { _, view, position, _ ->
             if (view != null) {
+                val characterName = characterAutoCompleteTextView.text.toString()
+                val characterId = charactersNameList.indexOfFirst { it == characterName }
+                cache.characterId = charactersIdList[characterId]
+                println("xxxxxxxxxx position text "+characterAutoCompleteTextView.text.toString())
+                println("xxxxxxxxxx position xx "+position)
+                println("xxxxxxxxxx characterId xx "+characterId)
+                println("xxxxxxxxxx cache.characterId xx "+cache.characterId)
                 Utilities.hideKeyboard(this, view)
             }
         }
@@ -120,14 +140,12 @@ class SearchMatchUpsView : AppCompatActivity() {
         var game = gameAutoCompleteTextView.text.toString().trim()
         var character = characterAutoCompleteTextView.text.toString().trim()
         //Valida si existe el personaje en la lista de personajes en la respuesta
-        var position = charactersList.indexOf(character)
+        var position = charactersNameList.indexOf(character)
         if (position == -1){
             characterAutoCompleteTextView.text.clear()
             Utilities.required(characterAutoCompleteTextView)
             return
         }
-        var characterId = charactersIdList[position]
-        cache.characterId = characterId
         startActivity(Intent(applicationContext, ListMatchUpsView::class.java))
     }
 

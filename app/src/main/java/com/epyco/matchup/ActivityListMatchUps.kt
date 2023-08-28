@@ -25,6 +25,7 @@ class ListMatchUpsView : AppCompatActivity() {
     lateinit var matchUpRecycler: RecyclerView
     lateinit var matchUpAdapter: MatchupAdapter
     lateinit var cache: MatchUpCache
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list_matchup)
@@ -50,9 +51,11 @@ class ListMatchUpsView : AppCompatActivity() {
         networkRequest.addToRequestQueue(object : StringRequest(
             Method.POST, getString(R.string.controller, "getCharacterMatchUps"),
             Response.Listener { response ->
-                println(response)
+                println("xxxxxxxxx response"+response)
                 try {
                     val charactersCache = JSONArray(cache.characterJSON)
+                    println("xxxxxxxxxx cache.characterJSON"+cache.characterJSON)
+                    println("xxxxxxxxxx charactersCache"+charactersCache)
                     val matchUpsArrays = JSONArray(response)
                     for (i in 0 until matchUpsArrays.length()) {
                         val matchUpArray = matchUpsArrays.getJSONArray(i)
@@ -66,8 +69,9 @@ class ListMatchUpsView : AppCompatActivity() {
                             }
                         }
                         matchUpsList.add(MatchUp(cache.characterName, characterName2, matchupValue))
+                        matchUpAdapter.notifyItemChanged(i)
                     }
-                    matchUpAdapter.notifyDataSetChanged()
+                    println("xxxxxxxxxx matchUpsArrays"+matchUpsArrays)
                 } catch (e: JSONException) {
                 }
             }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
