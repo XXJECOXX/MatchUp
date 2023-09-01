@@ -69,8 +69,9 @@ class ListMatchUpsView : AppCompatActivity() {
                             }
                         }
                         matchUpsList.add(MatchUp(cache.characterName, characterName2, matchupValue))
-                        matchUpAdapter.notifyItemChanged(i)
+                        matchUpsList.sortBy{it.characterName2}
                     }
+                    matchUpAdapter.notifyDataSetChanged()
                     println("xxxxxxxxxx matchUpsArrays"+matchUpsArrays)
                 } catch (e: JSONException) {
                 }

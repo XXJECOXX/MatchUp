@@ -21,9 +21,22 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/banner_ad_unit_id">
+
+        </com.google.android.gms.ads.AdView>
 
     </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/selector_rounded_blue"
+        android:gravity="center"
+        android:textColor="@color/softWhite"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"

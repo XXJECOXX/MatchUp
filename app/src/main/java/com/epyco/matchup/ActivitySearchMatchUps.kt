@@ -38,24 +38,7 @@ class SearchMatchUpsView : AppCompatActivity() {
 
         networkRequest = NetworkRequest(applicationContext)
 
-        if (cache.searchViewCachedData){
-            characterAutoCompleteTextView.isEnabled = true
-            gameAutoCompleteTextView.setText(cache.game)
-            characterAutoCompleteTextView.setText(cache.characterName)
-            val games = JSONArray(cache.gameJSON)
-            for (i in 0 until games.length()) {
-                gameList.add(games.getString(i))
-            }
-            gameAdapter.notifyDataSetChanged()
-            val charactersArrays = JSONArray(cache.characterJSON)
-            for (i in 0 until charactersArrays.length()) {
-                val character = charactersArrays.getJSONArray(i)
-                charactersIdList.add(character.getString(0))
-                charactersNameList.add(character.getString(1))
-            }
-            characterAdapter.notifyDataSetChanged()
-        }
-        else {
+
             networkRequest.addToRequestQueue(object : StringRequest(
                 Method.POST, getString(R.string.controller, "getAllGames"),
                 Response.Listener { response ->
@@ -70,7 +53,6 @@ class SearchMatchUpsView : AppCompatActivity() {
                     }
                 }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
             ) {})
-        }
 
         gameAutoCompleteTextView.setOnItemClickListener { adapter, view, position, _ ->
             if (view != null) {
