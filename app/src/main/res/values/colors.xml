@@ -3,6 +3,8 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
+    <color name="purple_dark">#551a8b</color>
+    <color name="spinner_autocomplete">@color/purple_dark</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
@@ -19,8 +21,6 @@
     <color name="colorPrimaryVariant">@color/colorOlivine</color>
     <color name="colorClear">#00000000</color>
 
-    <color name="colorToolbar">@color/colorOlivineAlpha</color>
-    <color name="colorPopUp">@color/colorGrannySmithApple</color>
     <color name="colorButtonGradient1">@color/colorGrannySmithAppleAlpha</color>
     <color name="colorButtonGradient2">@color/colorSpringGreen30</color>
     <color name="colorButtonText">@color/colorFrenchBlue</color>

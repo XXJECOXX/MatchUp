@@ -2,7 +2,6 @@ package com.epyco.matchup
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.indexOf
 import android.view.View
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,10 +11,14 @@ import com.epyco.matchup.adapters.SuggestStringAdapter
 import com.epyco.matchup.helper.MatchUpCache
 import com.epyco.matchup.helper.NetworkRequest
 import com.epyco.matchup.helper.Utilities
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import org.json.JSONArray
 import org.json.JSONException
 
 class SearchMatchUpsView : AppCompatActivity() {
+    lateinit var mAdView: AdView
     private lateinit var networkRequest: NetworkRequest
     private lateinit var gameAutoCompleteTextView: AutoCompleteTextView
     private lateinit var characterAutoCompleteTextView: AutoCompleteTextView
@@ -28,6 +31,10 @@ class SearchMatchUpsView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_matchups)
+        MobileAds.initialize(this)
+        mAdView = findViewById(R.id.adView)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
         cache = MatchUpCache(applicationContext)
         gameAutoCompleteTextView = findViewById(R.id.gameAutoComplete)
         characterAutoCompleteTextView = findViewById(R.id.characterAutoComplete)
@@ -37,22 +44,20 @@ class SearchMatchUpsView : AppCompatActivity() {
         characterAutoCompleteTextView.setAdapter(characterAdapter)
 
         networkRequest = NetworkRequest(applicationContext)
-
-
-            networkRequest.addToRequestQueue(object : StringRequest(
-                Method.POST, getString(R.string.controller, "getAllGames"),
-                Response.Listener { response ->
-                    try {
-                        cache.gameJSON = response
-                        val games = JSONArray(response)
-                        for (i in 0 until games.length()) {
-                            gameList.add(games.getString(i))
-                        }
-                        gameAdapter.notifyDataSetChanged()
-                    } catch (_: JSONException) {
+        networkRequest.addToRequestQueue(object : StringRequest(
+            Method.POST, getString(R.string.controller, "getAllGames"),
+            Response.Listener { response ->
+                try {
+                    cache.gameJSON = response
+                    val games = JSONArray(response)
+                    for (i in 0 until games.length()) {
+                        gameList.add(games.getString(i))
                     }
-                }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
-            ) {})
+                    gameAdapter.notifyDataSetChanged()
+                } catch (_: JSONException) {
+                }
+            }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
+        ) {})
 
         gameAutoCompleteTextView.setOnItemClickListener { adapter, view, position, _ ->
             if (view != null) {
@@ -128,7 +133,7 @@ class SearchMatchUpsView : AppCompatActivity() {
             Utilities.required(characterAutoCompleteTextView)
             return
         }
-        startActivity(Intent(applicationContext, ListMatchUpsView::class.java))
+        startActivity(Intent(applicationContext, CharacterMatchUpsList::class.java))
     }
 
 

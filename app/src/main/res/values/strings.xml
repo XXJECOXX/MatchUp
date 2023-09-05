@@ -27,5 +27,6 @@
     <string name="errorLogin">Incorrect username or password</string>
     <string name="errorPasswordReset">Can\'t find that email, sorry</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="button_info">Button Information</string>
 
 </resources>

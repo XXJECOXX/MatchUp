@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp">
 
         <LinearLayout
             android:id="@+id/searchLinearLayout"
@@ -22,9 +23,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:layout_marginHorizontal="50dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="15dp"
-                android:maxHeight="120px"
+                android:maxHeight="200px"
                 android:src="@drawable/matchup_baner" />
 
             <AutoCompleteTextView
@@ -41,7 +42,8 @@
                 android:layout_marginVertical="15dp"
                 android:selectAllOnFocus="true"
                 android:imeOptions="flagNoExtractUi|actionDone"
-                android:textColor="#000000"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
                 android:hint="Game"
                 android:textSize="16sp" />
 
@@ -59,7 +61,8 @@
                 android:selectAllOnFocus="true"
                 android:imeOptions="flagNoExtractUi|actionDone"
                 android:inputType="text"
-                android:textColor="#000000"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
                 android:hint="Character"
                 android:enabled="false"
                 android:textSize="16sp" />
@@ -89,11 +92,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="70dp"
+                android:layout_margin="15dp"
                 android:layout_marginBottom="10dp"
                 android:onClick="showInfo"
+                android:contentDescription="@string/button_info"
                 android:background="@color/black"
                 android:src="@drawable/ic_info" />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-9983989988655125/9594793806">
+            </com.google.android.gms.ads.AdView>
 
         </LinearLayout>
 

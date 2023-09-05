@@ -19,7 +19,7 @@ import org.json.JSONArray
 import org.json.JSONException
 
 
-class ListMatchUpsView : AppCompatActivity() {
+class CharacterMatchUpsList : AppCompatActivity() {
     lateinit var mAdView: AdView
     var matchUpsList: MutableList<MatchUp> = mutableListOf()
     lateinit var matchUpRecycler: RecyclerView
@@ -28,7 +28,7 @@ class ListMatchUpsView : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.list_matchup)
+        setContentView(R.layout.activity_character_matchups)
         MobileAds.initialize(this)
         mAdView = findViewById(R.id.adView)
         val adRequest: AdRequest = AdRequest.Builder().build()

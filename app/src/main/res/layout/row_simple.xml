@@ -4,13 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingHorizontal="15dp"
-    android:paddingVertical="5dp">
+    android:paddingVertical="5dp"
+    android:background="@color/spinner_autocomplete">
 
     <TextView
         android:id="@+id/suggestTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:textColor="@color/white"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall" />
 

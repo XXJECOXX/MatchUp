@@ -38,7 +38,7 @@
                 android:layout_margin="15dp"
                 android:autoLink="email"
                 android:gravity="center"
-                android:text="Email: matchupapp@gmail.com"
+                android:text="Email: matchup.epyco@gmail.com"
                 android:textColor="@color/colorMagicMint"
                 android:textSize="14sp" />
 
