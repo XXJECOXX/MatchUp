@@ -13,19 +13,21 @@
         android:roundIcon="@mipmap/ic_matchup_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MatchUp">
-        <activity android:name=".CharacterMatchUpsList">
+        <activity android:name=".ActivityCharacterMatchUpsList">
         </activity>
         <activity android:name=".ActivityInfo">
         </activity>
         <activity
-            android:name=".SearchMatchUpsView"
-            android:exported="true" >
+            android:name=".ActivitySearchMatchUps"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <!-- MatchUp AdMob app ID: ca-app-pub-9983989988655125~9054385791 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9983989988655125~9054385791"/>

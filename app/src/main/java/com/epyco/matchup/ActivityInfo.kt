@@ -13,7 +13,7 @@ class ActivityInfo : AppCompatActivity() {
         (findViewById<View>(R.id.website) as TextView).text =
             "Website: " + getString(R.string.website)
         (findViewById<View>(R.id.privacy) as TextView).text =
-            "Privacy Policy: " + getString(R.string.website) + "/privacy.pdf"
+            "Privacy Policy: " + getString(R.string.website) + "/MatchUpPrivacyPolicy.html"
         try {
             val appInfo = this.packageManager.getPackageInfo(this.packageName, 0)
             (findViewById<View>(R.id.versionText) as TextView).text =

@@ -1,8 +1,10 @@
 package com.epyco.matchup
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +21,7 @@ import org.json.JSONArray
 import org.json.JSONException
 
 
-class CharacterMatchUpsList : AppCompatActivity() {
+class ActivityCharacterMatchUpsList : AppCompatActivity() {
     lateinit var mAdView: AdView
     var matchUpsList: MutableList<MatchUp> = mutableListOf()
     lateinit var matchUpRecycler: RecyclerView
@@ -27,6 +29,7 @@ class CharacterMatchUpsList : AppCompatActivity() {
     lateinit var cache: MatchUpCache
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Toast.makeText(this, "Recompensa obtenida, Gracias", Toast.LENGTH_LONG).show()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_matchups)
         MobileAds.initialize(this)
@@ -51,11 +54,8 @@ class CharacterMatchUpsList : AppCompatActivity() {
         networkRequest.addToRequestQueue(object : StringRequest(
             Method.POST, getString(R.string.controller, "getCharacterMatchUps"),
             Response.Listener { response ->
-                println("xxxxxxxxx response"+response)
                 try {
                     val charactersCache = JSONArray(cache.characterJSON)
-                    println("xxxxxxxxxx cache.characterJSON"+cache.characterJSON)
-                    println("xxxxxxxxxx charactersCache"+charactersCache)
                     val matchUpsArrays = JSONArray(response)
                     for (i in 0 until matchUpsArrays.length()) {
                         val matchUpArray = matchUpsArrays.getJSONArray(i)
@@ -72,7 +72,6 @@ class CharacterMatchUpsList : AppCompatActivity() {
                     }
                     matchUpsList.sortBy{it.characterName2}
                     matchUpAdapter.notifyDataSetChanged()
-                    println("xxxxxxxxxx matchUpsArrays"+matchUpsArrays)
                 } catch (e: JSONException) {
                 }
             }, Response.ErrorListener { error -> networkRequest.handleVolleyError(error) }
@@ -90,5 +89,8 @@ class CharacterMatchUpsList : AppCompatActivity() {
     fun orderByWinRatio(view: View) {
         matchUpsList.sortBy { it.value }
         matchUpAdapter.notifyDataSetChanged()
+    }
+    override fun onBackPressed() {
+        finish()
     }
 }
