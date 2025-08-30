@@ -1,10 +1,8 @@
 package com.epyco.matchup
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +27,6 @@ class ActivityCharacterMatchUpsList : AppCompatActivity() {
     lateinit var cache: MatchUpCache
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Toast.makeText(this, "Recompensa obtenida, Gracias", Toast.LENGTH_LONG).show()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_matchups)
         MobileAds.initialize(this)
@@ -89,8 +86,5 @@ class ActivityCharacterMatchUpsList : AppCompatActivity() {
     fun orderByWinRatio(view: View) {
         matchUpsList.sortBy { it.value }
         matchUpAdapter.notifyDataSetChanged()
-    }
-    override fun onBackPressed() {
-        finish()
     }
 }

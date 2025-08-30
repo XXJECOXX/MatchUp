@@ -16,6 +16,7 @@
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
+            android:layout_marginTop="100dp"
             android:padding="10dp">
 
             <ImageView
@@ -24,8 +25,8 @@
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:layout_marginHorizontal="30dp"
-                android:layout_marginVertical="15dp"
-                android:maxHeight="200px"
+                android:layout_marginVertical="50dp"
+                android:maxHeight="200dp"
                 android:src="@drawable/matchup_baner" />
 
             <AutoCompleteTextView
@@ -37,14 +38,14 @@
                 android:completionThreshold="1"
                 android:dropDownVerticalOffset="0dp"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="12dp"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="15dp"
                 android:selectAllOnFocus="true"
                 android:imeOptions="flagNoExtractUi|actionDone"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:hint="Game"
+                android:hint="Game (only autocompleted games)"
                 android:textSize="16sp" />
 
             <AutoCompleteTextView
@@ -59,11 +60,12 @@
                 android:layout_marginVertical="15dp"
                 android:padding="10dp"
                 android:selectAllOnFocus="true"
+                android:visibility="gone"
                 android:imeOptions="flagNoExtractUi|actionDone"
                 android:inputType="text"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:hint="Character"
+                android:hint="Character (only autocomplete characters)"
                 android:enabled="false"
                 android:textSize="16sp" />
 

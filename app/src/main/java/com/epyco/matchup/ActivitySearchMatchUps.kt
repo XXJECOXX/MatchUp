@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -13,24 +12,14 @@ import com.epyco.matchup.adapters.SuggestStringAdapter
 import com.epyco.matchup.helper.MatchUpCache
 import com.epyco.matchup.helper.NetworkRequest
 import com.epyco.matchup.helper.Utilities
-import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.OnUserEarnedRewardListener
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.gms.ads.rewarded.RewardItem
-import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd
-import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback
 import org.json.JSONArray
 import org.json.JSONException
 
-class ActivitySearchMatchUps : AppCompatActivity(), OnUserEarnedRewardListener {
+class ActivitySearchMatchUps : AppCompatActivity() {
     lateinit var mAdView: AdView
-    private var rewardedInterstitialAd: RewardedInterstitialAd? = null
-    private final var TAG = "ActivitySearchMatchUps"
     private lateinit var networkRequest: NetworkRequest
     private lateinit var gameAutoCompleteTextView: AutoCompleteTextView
     private lateinit var characterAutoCompleteTextView: AutoCompleteTextView
@@ -45,9 +34,6 @@ class ActivitySearchMatchUps : AppCompatActivity(), OnUserEarnedRewardListener {
         setContentView(R.layout.activity_search_matchups)
         MobileAds.initialize(this)
         mAdView = findViewById(R.id.adView)
-        MobileAds.initialize(this) { initializationStatus ->
-            loadAd()
-        }
         val adRequest: AdRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
         cache = MatchUpCache(applicationContext)
@@ -80,6 +66,7 @@ class ActivitySearchMatchUps : AppCompatActivity(), OnUserEarnedRewardListener {
                 charactersNameList.clear()
                 charactersIdList.clear()
                 characterAdapter.notifyDataSetChanged()
+                characterAutoCompleteTextView.visibility = View.VISIBLE
                 val gameName = gameAutoCompleteTextView.text.toString()
                 val gameId = gameList.indexOfFirst { it == gameName }
                 cache.game = gameList[gameId]
@@ -122,21 +109,29 @@ class ActivitySearchMatchUps : AppCompatActivity(), OnUserEarnedRewardListener {
         Utilities.hideKeyboard(this, view)
         gameAutoCompleteTextView.error = null
         characterAutoCompleteTextView.error = null
-
-        // Validate required fields
-        if (!Utilities.required(arrayOf(gameAutoCompleteTextView, characterAutoCompleteTextView))) {
+        var game = gameAutoCompleteTextView.text.toString().trim()
+        var gamePosition = gameList.indexOf(game)
+        if (gamePosition == -1){
+            gameAutoCompleteTextView.text.clear()
+            Utilities.required(gameAutoCompleteTextView)
+            gameAutoCompleteTextView.text.clear()
             return
         }
-        var game = gameAutoCompleteTextView.text.toString().trim()
+
         var character = characterAutoCompleteTextView.text.toString().trim()
         //Valida si existe el personaje en la lista de personajes en la respuesta
-        var position = charactersNameList.indexOf(character)
-        if (position == -1){
+        var characterPosition = charactersNameList.indexOf(character)
+        if (characterPosition == -1){
             characterAutoCompleteTextView.text.clear()
             Utilities.required(characterAutoCompleteTextView)
             return
         }
-        rewardedInterstitialAd?.show(this, this)
+
+        // Validate required fields are not empty
+        if (!Utilities.required(arrayOf(gameAutoCompleteTextView, characterAutoCompleteTextView))) {
+            return
+        }
+        startActivity(Intent(applicationContext, ActivityCharacterMatchUpsList::class.java))
     }
 
 
@@ -155,56 +150,6 @@ class ActivitySearchMatchUps : AppCompatActivity(), OnUserEarnedRewardListener {
         else {
             cache.searchViewCachedData = false
         }
-    }
-
-    private fun loadAd() {
-        RewardedInterstitialAd.load(this, "ca-app-pub-9983989988655125/9327784625",
-            AdRequest.Builder().build(), object : RewardedInterstitialAdLoadCallback() {
-                override fun onAdLoaded(ad: RewardedInterstitialAd) {
-                    rewardedInterstitialAd = ad
-                    rewardedInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
-                        override fun onAdClicked() {
-                            // Called when a click is recorded for an ad.
-                            Log.d(TAG, "Ad was clicked.")
-                        }
-
-                        override fun onAdDismissedFullScreenContent() {
-                            // Called when ad is dismissed.
-                            // Set the ad reference to null so you don't show the ad a second time.
-                            startActivity(Intent(applicationContext, ActivityCharacterMatchUpsList::class.java))
-                            Log.d(TAG, "Ad dismissed fullscreen content.")
-                        }
-
-                        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                            // Called when ad fails to show.
-                            startActivity(Intent(applicationContext, ActivityCharacterMatchUpsList::class.java))
-                            Log.e(TAG, "Ad failed to show fullscreen content.")
-                        }
-
-                        override fun onAdImpression() {
-                            // Called when an impression is recorded for an ad.
-                            Log.d(TAG, "Ad recorded an impression.")
-                        }
-
-                        override fun onAdShowedFullScreenContent() {
-                            // Called when ad is shown.
-                            Log.d(TAG, "Ad showed fullscreen content.")
-                        }
-                    }
-                }
-
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    adError?.toString()?.let { Log.d(TAG, it) }
-                }
-            })
-    }
-
-    override fun onUserEarnedReward(p0: RewardItem) {
-        val toast = Toast.makeText(this, "Recompensa obtenida, Gracias", Toast.LENGTH_LONG)
-        toast.show()
-    }
-    override fun onBackPressed() {
-        finish()
     }
 
 }
